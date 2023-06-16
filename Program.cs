@@ -13,7 +13,7 @@ public class Program
         //Si no existe el constructor en el codigo de HelperDeJson, se considera un constructor sin argumentos
         var TrabajandoJson = new PersonajesJson();
         var ListaPersonajes = new List<personaje>();
-        var listadoPersonajesRecuperado = new List<personaje>();
+        var personajesRecup = new List<personaje>();
         const string NombreArchivo = "personajes.json";
 
         //Si el archivo json no existe
@@ -36,37 +36,74 @@ public class Program
             // Pruebo mostrar la lista
             Console.WriteLine("\n--Guardamos los personajes en una lista--\n");
             Console.WriteLine("\n--Mostramos los elementos de la lista--");
-            MostrarPersonajes(ListaPersonajes);
+            MostrarDatosPersonajes(ListaPersonajes);
 
 
 
             Console.WriteLine("\n--Creando archivo personajes.json--");
+
             //Guarda el texto de PersonajesJson en el archivo personajes.json
             TrabajandoJson.GuardarPersonajes(NombreArchivo, ListaPersonajes);
 
             Console.WriteLine("\n--Deserializando personajes.json y guardando en una lista--");
-            listadoPersonajesRecuperado = TrabajandoJson.LeerPersonajes(NombreArchivo); 
+            personajesRecup = TrabajandoJson.LeerPersonajes(NombreArchivo); 
+
             Console.WriteLine("--Mostrando listado de personajes recuperado--\n");
-            MostrarPersonajes(listadoPersonajesRecuperado);
+            MostrarDatosPersonajes(personajesRecup);
 
         } else {
             Console.WriteLine("--Archivo personajes.json ya existente--\n");
 
-            listadoPersonajesRecuperado = TrabajandoJson.LeerPersonajes(NombreArchivo);
+            personajesRecup = TrabajandoJson.LeerPersonajes(NombreArchivo);
             Console.WriteLine("--Mostrando listado de personajes recuperado--");
-            MostrarPersonajes(listadoPersonajesRecuperado);
+            MostrarDatosPersonajes(personajesRecup);
         }
+
+        int opcion, opcion2;
+        Console.WriteLine("\nIngrese el indice del personaje para el jugador 1 (1 al 10):");
+        if (int.TryParse(Console.ReadLine(), out opcion) && opcion>0 && opcion<11)
+        {
+            Console.WriteLine("\nJugador 1:");
+            Console.WriteLine("Nombre: " + personajesRecup[opcion - 1].Nombre + " - Apodo: " + personajesRecup[opcion - 1].Apodo);
+            
+        } else
+        {
+            Console.WriteLine("\nOpcion invalida");
+        }
+
+        Console.WriteLine("\nIngrese el indice (distinto al del jugador 1) del personaje para el jugador 2 (1 al 10):");
+        if (int.TryParse(Console.ReadLine(), out opcion2) && opcion2>0 && opcion2<11 && opcion != opcion2)
+        {
+            Console.WriteLine("\nJugador 2:");
+            Console.WriteLine("Nombre: " + personajesRecup[opcion2 - 1].Nombre + " Apodo: " + personajesRecup[opcion2 - 1].Apodo);
+            
+        } else
+        {
+            Console.WriteLine("\nOpcion invalida");
+        }
+        
+        
  
         return;
     }
 
-    public static void MostrarPersonajes(List<personaje> Lista)
+    public static void MostrarDatosPersonajes(List<personaje> Lista)
     {
+        int indice = 1;
         foreach (var player in Lista)
         {
-            Console.WriteLine("\n"+player.mostrarDatos());
+            Console.WriteLine("\nPersonaje N°"+ indice + player.mostrarDatos());
+            indice++;
         }
         return;
+    }
+
+    public static void NombresPersonajes(List<personaje> Lista)
+    {
+        foreach (var personaje in Lista)
+        {
+            Console.WriteLine("1- ");
+        }
     }
 
 }
