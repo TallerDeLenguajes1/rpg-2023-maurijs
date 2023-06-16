@@ -18,41 +18,44 @@ public class Program
 
         //Si el archivo json no existe
         if (!File.Exists(NombreArchivo))
-        {    
+        {
+            Console.WriteLine("Archivo personajes.json no encontrado\n");
             //Creo los 10 personajes
+            Console.WriteLine("--Creamos aleatoriamente los personajes--\n");
             for (int i = 0; i < 10; i++)
             {
-                Console.WriteLine("Creacion del personaje " + (i+1));
+                Console.WriteLine("Creacion del personaje " + (i+1) + ":");
                 personaje = fabrica.CrearPersonaje();
 
                 Console.WriteLine(personaje.mostrarDatos());
 
                 //Guardo cada personaje en la lista
                 ListaPersonajes.Add(personaje);
-                Console.WriteLine("===============================");
+                Console.WriteLine("======================================================");
             }
             // Pruebo mostrar la lista
-            Console.WriteLine("Mostrando los elementos de la lista");
+            Console.WriteLine("\n--Guardamos los personajes en una lista--\n");
+            Console.WriteLine("\n--Mostrando los elementos de la lista--");
             MostrarPersonajes(ListaPersonajes);
 
 
-            Console.WriteLine("--Creando archivo personajes.json--");
+            Console.WriteLine("\n--Creando archivo personajes.json--");
             //Guardo el archivo
-            Console.WriteLine("--Serializando--");
+            Console.WriteLine("\n--Serializando--");
             //Convierte la lista a tipo string
             string PersonajesJson = JsonSerializer.Serialize(ListaPersonajes);
-            Console.WriteLine("Archivo Serializado : " + PersonajesJson);
-            Console.WriteLine("--Guardando--");
+            Console.WriteLine("\nArchivo Serializado : " + PersonajesJson);
+            Console.WriteLine("\n--Guardando--");
 
             //Guarda el texto de PersonajesJson en el archivo personajes.json
             miHelperDeArchivos.GuardarArchivoTexto(NombreArchivo, PersonajesJson);
 
             //Abro el Archivo
-            Console.WriteLine("--Abriendo--");
+            Console.WriteLine("\n--Abriendo--");
             string jsonDocument = miHelperDeArchivos.AbrirArchivoTexto(NombreArchivo);
-            Console.WriteLine("--Deserializando--");
+            Console.WriteLine("\n--Deserializando--");
             var listadoPersonajesRecuperado = JsonSerializer.Deserialize<List<personaje>>(jsonDocument);
-            Console.WriteLine("--Mostrando datos recuperardos--");
+            Console.WriteLine("\n--Mostrando datos recuperados--\n");
             MostrarPersonajes(listadoPersonajesRecuperado);
         } else {
             Console.WriteLine("--Archivo personajes.json ya existente--");
