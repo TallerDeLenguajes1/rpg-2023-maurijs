@@ -2,12 +2,7 @@ namespace EspacioPersonajes
 {
     public class FabricaPersonajes {
 
-        private Random random;
-
-        public FabricaPersonajes()
-        {
-            random = new Random(); 
-        }
+        private Random random = new Random(); 
 
         public personaje CrearPersonaje()
         {
@@ -68,6 +63,10 @@ namespace EspacioPersonajes
             }
 
             return nuevoPersonaje;
+        }
+
+        public FabricaPersonajes()
+        {
         }
 
         private int numAleat(int min, int max)

@@ -10,7 +10,8 @@ public class Program
     {
         FabricaPersonajes fabrica = new FabricaPersonajes();
         personaje personaje;
-        //Si no existe el constructo en el codigo de HelperDeJson, se considera un     constructor sin argumentos
+        
+        //Si no existe el constructor en el codigo de HelperDeJson, se considera un constructor sin argumentos
         var miHelperDeArchivos = new HelperDeJson();
 
         var ListaPersonajes = new List<personaje>();
