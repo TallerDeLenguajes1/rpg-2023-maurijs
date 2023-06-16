@@ -52,6 +52,8 @@ namespace EspacioPersonajes
         private int nivel;
         private int armadura;
         private int salud;
+        private int defensa;
+        private int ataque;
         //============= Caracteristicas =============================//
 
 
@@ -66,7 +68,8 @@ namespace EspacioPersonajes
         public int Nivel { get => nivel; set => nivel = value; }
         public int Armadura { get => armadura; set => armadura = value; }
         public int Salud { get => salud; set => salud = value; }
-
+        public int Defensa { get => defensa; set => defensa = value; }
+        public int Ataque { get => ataque; set => ataque = value; }
 
         public personaje() // esta funcion la uso en el metodo de la fabrica
         {
@@ -74,7 +77,7 @@ namespace EspacioPersonajes
         }
         public string mostrarDatos()
         {
-            return "Nombre:" + Nombre + "- Apodo:" + Apodo +"- Edad:"+ Edad + "- Raza:" + Tipo;
+            return "Nombre:" + Nombre + " - Apodo:" + Apodo +" - Edad:"+ Edad + " - Raza:" + Tipo;
         }
     }
 }

@@ -29,6 +29,8 @@ namespace EspacioPersonajes
                     nuevoPersonaje.Armadura = numAleat(1, 7);
                     nuevoPersonaje.Salud = 100;
                     nuevoPersonaje.Edad = numAleat(30, 80);
+                    nuevoPersonaje.Ataque = numAleat(4, 8);
+                    nuevoPersonaje.Defensa = numAleat(2, 6);
                     nuevoPersonaje.FechaNac = new DateTime(DateTime.Now.Year - nuevoPersonaje.Edad, numAleat(1, 12), numAleat(1, 28));
 
                     break;
@@ -43,6 +45,8 @@ namespace EspacioPersonajes
                     nuevoPersonaje.Armadura = numAleat(1, 5);
                     nuevoPersonaje.Salud = 100;
                     nuevoPersonaje.Edad = numAleat(200, 2000);
+                    nuevoPersonaje.Ataque = numAleat(2, 6);
+                    nuevoPersonaje.Defensa = numAleat(4, 8);
                     nuevoPersonaje.FechaNac = new DateTime(DateTime.Now.Year - nuevoPersonaje.Edad, numAleat(1, 12), numAleat(1, 28));
                     break;
 
@@ -57,6 +61,8 @@ namespace EspacioPersonajes
                     nuevoPersonaje.Armadura = numAleat(3, 7);
                     nuevoPersonaje.Salud = 100;
                     nuevoPersonaje.Edad = numAleat(20, 60);
+                    nuevoPersonaje.Ataque = numAleat(2, 8);
+                    nuevoPersonaje.Defensa = numAleat(2, 8);
                     nuevoPersonaje.FechaNac = new DateTime(DateTime.Now.Year - nuevoPersonaje.Edad, numAleat(1, 12), numAleat(1, 28));
                     break;
             }
