@@ -12,15 +12,15 @@ namespace EspacioPersonajes
     {
         public string[] nombreOrco = { "Grom", "Thrum", "Drog", "Gorrum", "Harg", "Thurg", "Karg", "Doomhammer", "Deadeye", "Forebinder", "Elfkiller", "Skullsplitter", "Axeripper", "Tearshorn", "Fistcrusher"};
 
-        public string[] apodoOrco = { "Colmillo Verde", "Gruñidor", "Tragón", "Garra Salvaje", "Rugidor", "Devorador de Huesos", "Cabezón", "Espinas Negras", "Barriga de Hierro", "Peludo Descomunal", "Hedor Pestilente", "Puños de Roca", "Dientes Afilados", "Gigante Rugiente", "Triturador de Almas" };
+        public string[] apodoOrco = { "Colmillo Verde", "Demoledor", "Tragon", "Garra Salvaje", "Rugidor", "Devorador de Huesos", "Cabezon", "Espinas Negras", "Barriga de Hierro", "Peludo Descomunal", "Hedor Pestilente", "Punios de Roca", "Dientes Afilados", "Gigante Rugiente", "Triturador de Almas" };
 
-        public string[] nombreElfo = { "Legolas", "Arwen", "Galadriel", "Elrond", "Celeborn","Thranduil","Eowyn","Haldir", "Lúthien","Gil-galad","Tauriel", "Glorfindel","Círdan","Finrod","Celebrían" };
+        public string[] nombreElfo = { "Legolas", "Arwen", "Galadriel", "Elrond", "Celeborn","Thranduil","Eowyn","Haldir", "Luthien","Gil-galad","Tauriel", "Glorfindel","Cirdan","Finrod","Celebrian" };
 
-        public string[] apodoElfo = { "Estrella Plateada", "Susurros del Bosque", "Luz Brillante", "Danzante de Hojas", "Suspiro Estelar", "Voz de Armonía", "Espíritu Ágil", "Mirada Esmeralda", "Canto de la Aurora", "Alma Radiante", "Elegancia Silenciosa", "Guardián de los Secretos", "Serenidad Alada", "Lágrimas de Luna", "Eco de los Susurros" };
+        public string[] apodoElfo = { "Estrella Plateada", "Susurros del Bosque", "Luz Brillante", "Danzante de Hojas", "Suspiro Estelar", "Voz de Armonia", "Espiritu Agil", "Mirada Esmeralda", "Canto de la Aurora", "Alma Radiante", "Elegancia Silenciosa", "Guardian de los Secretos", "Serenidad Alada", "Lagrimas de Luna", "Eco de los Susurros" };
         
         public string[] nombreHumano = { "Juan", "Marco", "Emiliano", "Arturo", "Jorge", "Francisco", "Marcelo","Maximiliano","Manuel","Joaquin", "Ernesto", "Angel", "Nicolas", "Lionel", "Santiago" };
 
-        public string[] apodoHumano = { "Espada de Acero", "Furia Indomable", "Martillo de Batalla", "León Valiente", "Sangre de Héroe", "Llama Ardiente", "Guardián Implacable", "Centinela Audaz", "Halcón de Guerra", "Escudo de Honor", "Venganza Justa", "Bravo Defensor", "Destello de Valor", "Corazón Intrépido", "Campeón Sin Temor" };
+        public string[] apodoHumano = { "Espada de Acero", "Furia Indomable", "Martillo de Batalla", "Leon Valiente", "Sangre de Heroe", "Llama Ardiente", "Guardian Implacable", "Centinela Audaz", "Halcon de Guerra", "Escudo de Honor", "Venganza Justa", "Bravo Defensor", "Destello de Valor", "Corazon Intrepido", "Campeon Sin Temor" };
 
         //constructor 
         public constantes()
