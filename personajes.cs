@@ -22,6 +22,7 @@ namespace EspacioPersonajes
 
         public string[] apodoHumano = { "Espada de Acero", "Furia Indomable", "Martillo de Batalla", "Leon Valiente", "Sangre de Heroe", "Llama Ardiente", "Guardian Implacable", "Centinela Audaz", "Halcon de Guerra", "Escudo de Honor", "Venganza Justa", "Bravo Defensor", "Destello de Valor", "Corazon Intrepido", "Campeon Sin Temor" };
 
+        public const int constanteAjuste = 500;
         //constructor 
         public constantes()
         {
@@ -54,8 +55,10 @@ namespace EspacioPersonajes
         private int salud;
         private int defensa;
         private int ataque;
-        //============= Caracteristicas =============================//
+        private int efectividad;
+        private int danioCausado;
 
+        //============= Caracteristicas =============================//
 
         public string Nombre { get => nombre; set => nombre = value; }
         public string Apodo { get => apodo; set => apodo = value; }
@@ -70,7 +73,9 @@ namespace EspacioPersonajes
         public int Salud { get => salud; set => salud = value; }
         public int Defensa { get => defensa; set => defensa = value; }
         public int Ataque { get => ataque; set => ataque = value; }
-
+        public int Efectividad { get => efectividad; set => efectividad = value; }
+        public int DanioCausado { get => danioCausado; set => danioCausado = value; }
+        //==============================================================//
         public personaje() // esta funcion la uso en el metodo de la fabrica
         {
         
