@@ -17,7 +17,7 @@ public class Program
         const string NombreArchivo = "personajes.json";
 
         //Si el archivo json no existe
-        if (!File.Exists(NombreArchivo))
+        if (!TrabajandoJson.Existe(NombreArchivo))
         {
             Console.WriteLine("Archivo personajes.json no encontrado\n");
             //Creo los 10 personajes
@@ -50,10 +50,10 @@ public class Program
             MostrarPersonajes(listadoPersonajesRecuperado);
 
         } else {
-            Console.WriteLine("--Archivo personajes.json ya existente--");
+            Console.WriteLine("--Archivo personajes.json ya existente--\n");
 
             listadoPersonajesRecuperado = TrabajandoJson.LeerPersonajes(NombreArchivo);
-            Console.WriteLine("--Mostrando listado de personajes recuperado--\n");
+            Console.WriteLine("--Mostrando listado de personajes recuperado--");
             MostrarPersonajes(listadoPersonajesRecuperado);
         }
  

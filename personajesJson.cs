@@ -35,5 +35,25 @@ namespace EspacioPersonajes
                 }
             }
         }
+
+        public bool Existe(string nombreArchivo)
+        {
+            if (File.Exists(nombreArchivo))
+            {
+                using (var archivo = new FileStream(nombreArchivo, FileMode.Open))
+                {
+                    using (var strReader = new StreamReader(archivo))
+                    {
+                        //Si es distinto de null
+                        if (strReader.ReadLine() != null){
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
