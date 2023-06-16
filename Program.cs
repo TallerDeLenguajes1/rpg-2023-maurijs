@@ -10,30 +10,31 @@ public class Program
     {
         FabricaPersonajes fabrica = new FabricaPersonajes();
         personaje personaje;
-        
+
         //Si no existe el constructor en el codigo de HelperDeJson, se considera un constructor sin argumentos
         var miHelperDeArchivos = new HelperDeJson();
-
         var ListaPersonajes = new List<personaje>();
-
-        for (int i = 0; i < 10; i++)
-        {
-            Console.WriteLine("Creacion del personaje " + (i+1));
-            personaje = fabrica.CrearPersonaje();
-
-            Console.WriteLine(personaje.mostrarDatos());
-            
-            ListaPersonajes.Add(personaje);
-            
-            Console.WriteLine("===============================");
-        }
-
-        Console.WriteLine("Mostrando los elementos de la lista");
-        MostrarPersonajes(ListaPersonajes);
-
         const string NombreArchivo = "personajes.json";
+
+        //Si el archivo json no existe
         if (!File.Exists(NombreArchivo))
         {    
+            //Creo los 10 personajes
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine("Creacion del personaje " + (i+1));
+                personaje = fabrica.CrearPersonaje();
+
+                Console.WriteLine(personaje.mostrarDatos());
+
+                //Guardo cada personaje en la lista
+                ListaPersonajes.Add(personaje);
+                Console.WriteLine("===============================");
+            }
+            // Pruebo mostrar la lista
+            Console.WriteLine("Mostrando los elementos de la lista");
+            MostrarPersonajes(ListaPersonajes);
+
 
             Console.WriteLine("--Creando archivo personajes.json--");
             //Guardo el archivo
@@ -63,7 +64,7 @@ public class Program
             Console.WriteLine("--Mostrando datos recuperardos--");
             MostrarPersonajes(listadoPersonajesRecuperado);
         }
-
+ 
         return;
     }
 
@@ -71,7 +72,7 @@ public class Program
     {
         foreach (var player in Lista)
         {
-            Console.WriteLine(player.mostrarDatos());
+            Console.WriteLine("\n"+player.mostrarDatos());
         }
         return;
     }
