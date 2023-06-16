@@ -11,8 +11,16 @@ namespace EspacioPersonajes
     public class constantes
     {
         public string[] nombreOrco = { "Grom", "Thrum", "Drog", "Gorrum", "Harg", "Thurg", "Karg", "Doomhammer", "Deadeye", "Forebinder", "Elfkiller", "Skullsplitter", "Axeripper", "Tearshorn", "Fistcrusher"};
+
+        public string[] apodoOrco = { "Colmillo Verde", "Gruñidor", "Tragón", "Garra Salvaje", "Rugidor", "Devorador de Huesos", "Cabezón", "Espinas Negras", "Barriga de Hierro", "Peludo Descomunal", "Hedor Pestilente", "Puños de Roca", "Dientes Afilados", "Gigante Rugiente", "Triturador de Almas" };
+
         public string[] nombreElfo = { "Legolas", "Arwen", "Galadriel", "Elrond", "Celeborn","Thranduil","Eowyn","Haldir", "Lúthien","Gil-galad","Tauriel", "Glorfindel","Círdan","Finrod","Celebrían" };
+
+        public string[] apodoElfo = { "Estrella Plateada", "Susurros del Bosque", "Luz Brillante", "Danzante de Hojas", "Suspiro Estelar", "Voz de Armonía", "Espíritu Ágil", "Mirada Esmeralda", "Canto de la Aurora", "Alma Radiante", "Elegancia Silenciosa", "Guardián de los Secretos", "Serenidad Alada", "Lágrimas de Luna", "Eco de los Susurros" };
+        
         public string[] nombreHumano = { "Juan", "Marco", "Emiliano", "Arturo", "Jorge", "Francisco", "Marcelo","Maximiliano","Manuel","Joaquin", "Ernesto", "Angel", "Nicolas", "Lionel", "Santiago" };
+
+        public string[] apodoHumano = { "Espada de Acero", "Furia Indomable", "Martillo de Batalla", "León Valiente", "Sangre de Héroe", "Llama Ardiente", "Guardián Implacable", "Centinela Audaz", "Halcón de Guerra", "Escudo de Honor", "Venganza Justa", "Bravo Defensor", "Destello de Valor", "Corazón Intrépido", "Campeón Sin Temor" };
 
         //constructor 
         public constantes()
@@ -63,6 +71,10 @@ namespace EspacioPersonajes
         public personaje() // esta funcion la uso en el metodo de la fabrica
         {
         
+        }
+        public string mostrarDatos()
+        {
+            return "Nombre:" + Nombre + "- Apodo:" + Apodo +"- Edad:"+ Edad + "- Raza:" + Tipo;
         }
     }
 }
