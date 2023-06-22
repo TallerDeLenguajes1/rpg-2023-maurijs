@@ -8,55 +8,47 @@ public class Program
     public static void Main()
     {
         FabricaPersonajes fabrica = new FabricaPersonajes();
-        personaje personaje;
-
         //Si no existe el constructor en el codigo de HelperDeJson, se considera un constructor sin argumentos
         var TrabajandoJson = new PersonajesJson();
         var ListaPersonajes = new List<personaje>();
-        var personajesRecup = new List<personaje>();
-        const string NombreArchivo = "personajes.json";
+        var ListaPersonajesRecup = new List<personaje>();
+        int cantidad;
+        const string ArchivoJson = "personajes.json";
 
         //Si el archivo json no existe
-        if (!TrabajandoJson.Existe(NombreArchivo))
+        if (!TrabajandoJson.Existe(ArchivoJson))
         {
             Console.WriteLine("Archivo personajes.json no encontrado\n");
             //Creo los 10 personajes
             Console.WriteLine("--Creamos aleatoriamente los personajes--\n");
-            for (int i = 0; i < 10; i++)
+            Console.WriteLine("--Ingrese la cantidad de personajes (2, 4, 6, 8 o 10):--\n");
+            if (int.TryParse(Console.ReadLine(), out cantidad) && cantidad % 2 == 0)
             {
-                Console.WriteLine("Creacion del personaje " + (i+1) + ":");
-                personaje = fabrica.CrearPersonaje();
+                //cantidad de personajes
+                ListaPersonajes = fabrica.GenerarListaPersonajes(cantidad);  
+                
+                Console.WriteLine("\n--Guardamos los personajes en una lista--\n");
+                Console.WriteLine("\n--Mostramos los elementos de la lista--");
+                MostrarDatosPersonajes(ListaPersonajes);
 
-                Console.WriteLine(personaje.mostrarDatos());
+                Console.WriteLine("\n--Creando archivo personajes.json--");
 
-                //Guardo cada personaje en la lista
-                ListaPersonajes.Add(personaje);
-                Console.WriteLine("======================================================");
+                //Guarda los datos de la lista en el archivo personajes.json
+                TrabajandoJson.GuardarPersonajes(ArchivoJson, ListaPersonajes);
+
+                Console.WriteLine("\n--Deserializando personajes.json y guardando en una lista--");
+                ListaPersonajesRecup = TrabajandoJson.LeerPersonajes(ArchivoJson); 
+
+                Console.WriteLine("--Mostrando listado de personajes recuperado--\n");
+                MostrarDatosPersonajes(ListaPersonajesRecup);
             }
-            // Pruebo mostrar la lista
-            Console.WriteLine("\n--Guardamos los personajes en una lista--\n");
-            Console.WriteLine("\n--Mostramos los elementos de la lista--");
-            MostrarDatosPersonajes(ListaPersonajes);
-
-
-
-            Console.WriteLine("\n--Creando archivo personajes.json--");
-
-            //Guarda el texto de PersonajesJson en el archivo personajes.json
-            TrabajandoJson.GuardarPersonajes(NombreArchivo, ListaPersonajes);
-
-            Console.WriteLine("\n--Deserializando personajes.json y guardando en una lista--");
-            personajesRecup = TrabajandoJson.LeerPersonajes(NombreArchivo); 
-
-            Console.WriteLine("--Mostrando listado de personajes recuperado--\n");
-            MostrarDatosPersonajes(personajesRecup);
 
         } else {
             Console.WriteLine("--Archivo personajes.json ya existente--\n");
 
-            personajesRecup = TrabajandoJson.LeerPersonajes(NombreArchivo);
+            ListaPersonajesRecup = TrabajandoJson.LeerPersonajes(ArchivoJson);
             Console.WriteLine("--Mostrando listado de personajes recuperado--");
-            MostrarDatosPersonajes(personajesRecup);
+            MostrarDatosPersonajes(ListaPersonajesRecup);
         }
 
         int opcion, opcion2;
@@ -64,7 +56,7 @@ public class Program
         if (int.TryParse(Console.ReadLine(), out opcion) && opcion>0 && opcion<11)
         {
             Console.WriteLine("\nJugador 1:");
-            Console.WriteLine("Nombre: " + personajesRecup[opcion - 1].Nombre + " - Apodo: " + personajesRecup[opcion - 1].Apodo);
+            Console.WriteLine("Nombre: " + ListaPersonajesRecup[opcion - 1].Nombre + " - Apodo: " + ListaPersonajesRecup[opcion - 1].Apodo + " - Raza: " + ListaPersonajesRecup[opcion - 1].Tipo);
             
         } else
         {
@@ -75,7 +67,7 @@ public class Program
         if (int.TryParse(Console.ReadLine(), out opcion2) && opcion2>0 && opcion2<11 && opcion != opcion2)
         {
             Console.WriteLine("\nJugador 2:");
-            Console.WriteLine("Nombre: " + personajesRecup[opcion2 - 1].Nombre + " Apodo: " + personajesRecup[opcion2 - 1].Apodo);
+            Console.WriteLine("Nombre: " + ListaPersonajesRecup[opcion2 - 1].Nombre + " Apodo: " + ListaPersonajesRecup[opcion2 - 1].Apodo + " - Raza: " + ListaPersonajesRecup[opcion2 - 1].Tipo);
             
         } else
         {

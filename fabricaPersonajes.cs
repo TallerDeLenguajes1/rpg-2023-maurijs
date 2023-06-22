@@ -67,5 +67,19 @@ namespace EspacioPersonajes
             return random.Next(min, max + 1);
         }
 
+        public List<personaje> GenerarListaPersonajes(int cantidad)
+        {
+            FabricaPersonajes fabrica = new FabricaPersonajes();
+            //personaje personaje;
+            var ListaPersonajes = new List<personaje>();
+            for (int i = 0; i < cantidad; i++)
+            {
+                //personaje = fabrica.CrearPersonaje();
+                //ListaPersonajes.Add(personaje);
+                ListaPersonajes.Add(fabrica.CrearPersonaje());
+            }
+            return ListaPersonajes;
+        }
+
     }
 }

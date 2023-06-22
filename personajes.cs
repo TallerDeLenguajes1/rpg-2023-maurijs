@@ -82,9 +82,8 @@ namespace EspacioPersonajes
         }
         public string mostrarDatos()
         {
+            Console.WriteLine("====================================================================================================");
             string fecha = fechaNac.ToString("dd/MM/yyyy"); // Ejemplo de formato: "dd/MM/yyyy"
-            Console.WriteLine(fecha);
-
             return "\n---------------Datos-------------\nNombre: " + Nombre + " - Apodo: " + Apodo +" - Edad: "+ Edad + " - Raza: " + Tipo + " - Fecha de Nacimiento: " + fecha + "\n------------Caracteristicas----------\nVelocidad: " + Velocidad +" - Destreza: " + Destreza + " - Fuerza: " + Fuerza + " - Nivel: " + Nivel + " - Armadura: " + Armadura + " - Salud: " + Salud + " - Ataque: " + Ataque + " - Defensa: " + Defensa + " - Efectividad: " + Efectividad;
         }
     }
