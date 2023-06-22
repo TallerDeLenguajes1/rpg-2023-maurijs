@@ -14,6 +14,7 @@ public class Program
         var TrabajandoJson = new PersonajesJson();
         var ListaPersonajes = new List<personaje>();
         var personajesRecup = new List<personaje>();
+        int cantidad;
         const string NombreArchivo = "personajes.json";
 
         //Si el archivo json no existe
@@ -22,22 +23,25 @@ public class Program
             Console.WriteLine("Archivo personajes.json no encontrado\n");
             //Creo los 10 personajes
             Console.WriteLine("--Creamos aleatoriamente los personajes--\n");
-            for (int i = 0; i < 10; i++)
-            {
-                Console.WriteLine("Creacion del personaje " + (i+1) + ":");
-                personaje = fabrica.CrearPersonaje();
+            Console.WriteLine("--Ingrese la cantidad de jugadores (2, 4, 5, 8 u 10):--\n");
+            if (int.TryParse(Console.ReadLine(), out cantidad) && cantidad % 2 == 0 && cantidad<11 && cantidad>0)
+            {    
+                for (int i = 0; i < cantidad; i++)
+                {
+                    Console.WriteLine("Creacion del personaje " + (i+1) + ":");
+                    personaje = fabrica.CrearPersonaje();
 
-                Console.WriteLine(personaje.mostrarDatos());
+                    Console.WriteLine(personaje.mostrarDatos());
 
-                //Guardo cada personaje en la lista
-                ListaPersonajes.Add(personaje);
-                Console.WriteLine("======================================================");
+                    //Guardo cada personaje en la lista
+                    ListaPersonajes.Add(personaje);
+                    Console.WriteLine("======================================================");
+                }
+                // Pruebo mostrar la lista
+                Console.WriteLine("\n--Guardamos los personajes en una lista--\n");
+                Console.WriteLine("\n--Mostramos los elementos de la lista--");
+                MostrarDatosPersonajes(ListaPersonajes);
             }
-            // Pruebo mostrar la lista
-            Console.WriteLine("\n--Guardamos los personajes en una lista--\n");
-            Console.WriteLine("\n--Mostramos los elementos de la lista--");
-            MostrarDatosPersonajes(ListaPersonajes);
-
 
 
             Console.WriteLine("\n--Creando archivo personajes.json--");
