@@ -5,11 +5,11 @@ namespace EspacioPersonajes
     public class PersonajesJson
     {
 
-        public List<personaje>  LeerPersonajes(string nombreArchivo)
+        public List<personaje>  LeerPersonajes(string FilePath)
         {
             
             List<personaje> ListaPersonajes = new List<personaje>();
-            using (var archivoOpen = new FileStream(nombreArchivo, FileMode.Open))
+            using (var archivoOpen = new FileStream(FilePath, FileMode.Open))
             {
                 using (var strReader = new StreamReader(archivoOpen))
                 {
@@ -25,9 +25,10 @@ namespace EspacioPersonajes
         {
             //Serializando
             string PersonajesJson = JsonSerializer.Serialize(ListaPersonajes);
-
+            //Creo el archivo
             using(var archivo = new FileStream(nombreArchivo, FileMode.Create))
             {
+                //Instancio una clase StreamWriter
                 using (var strWriter = new StreamWriter(archivo))
                 {
                     strWriter.WriteLine("{0}", PersonajesJson);
