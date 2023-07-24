@@ -13,10 +13,10 @@ public class Program
         var ListaPersonajes = new List<personaje>();
         var ListaPersonajesRecup = new List<personaje>();
         int cantidad;
-        const string ArchivoJson = "personajes.json";
+        const string FileJsonPath = "personajes.json";
 
         //Si el archivo json no existe
-        if (!TrabajandoJson.Existe(ArchivoJson))
+        if (!TrabajandoJson.Existe(FileJsonPath))
         {
             Console.WriteLine("Archivo personajes.json no encontrado\n");
             //Creo los 10 personajes
@@ -33,11 +33,11 @@ public class Program
 
                 Console.WriteLine("\n--Creando archivo personajes.json--");
 
-                //Guarda los datos de la lista en el archivo personajes.json
-                TrabajandoJson.GuardarPersonajes(ArchivoJson, ListaPersonajes);
+                //Creo el archivo personajes.josn y guarda los datos de la lista en el
+                TrabajandoJson.GuardarPersonajes(FileJsonPath, ListaPersonajes);
 
                 Console.WriteLine("\n--Deserializando personajes.json y guardando en una lista--");
-                ListaPersonajesRecup = TrabajandoJson.LeerPersonajes(ArchivoJson); 
+                ListaPersonajesRecup = TrabajandoJson.LeerPersonajes(FileJsonPath); 
 
                 Console.WriteLine("--Mostrando listado de personajes recuperado--\n");
                 MostrarDatosPersonajes(ListaPersonajesRecup);
@@ -46,7 +46,7 @@ public class Program
         } else {
             Console.WriteLine("--Archivo personajes.json ya existente--\n");
 
-            ListaPersonajesRecup = TrabajandoJson.LeerPersonajes(ArchivoJson);
+            ListaPersonajesRecup = TrabajandoJson.LeerPersonajes(FileJsonPath);
             Console.WriteLine("--Mostrando listado de personajes recuperado--");
             MostrarDatosPersonajes(ListaPersonajesRecup);
         }

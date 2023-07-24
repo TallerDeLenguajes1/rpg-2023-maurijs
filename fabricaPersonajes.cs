@@ -24,6 +24,7 @@ namespace EspacioPersonajes
                     player.Edad = numAleat(30, 80);
                     player.Defensa = numAleat(2, 6);
                     break;
+                    
                 case 1:
                     player.Nombre = constante.nombreElfo[numAleat(0,14)];
                     player.Apodo = constante.apodoElfo[numAleat(0, 14)];
