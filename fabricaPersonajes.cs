@@ -97,7 +97,6 @@ namespace EspacioPersonajes
             int cantPersonajes = ListaGOT.Count;
             var IndexUsados = new List<int>();
             personajeGOT personaje;
-        
             while (IndexUsados.Count < cantidad)
             {
                 indexRandom = numAleat(0,  cantPersonajes);
