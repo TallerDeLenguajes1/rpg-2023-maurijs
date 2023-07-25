@@ -54,7 +54,7 @@ namespace EspacioPersonajes
         public int Ataque { get => ataque; set => ataque = value; }
         public int Astucia { get => astucia; set => astucia = value; }
         public int DanioCausado { get => danioCausado; set => danioCausado = value; }
-        public bool IsAlive => salud > 0;
+        public bool IsAlive => Salud > 0;
 
         //==============================================================//
         public Personaje() // esta funcion la uso en el metodo de la fabrica
