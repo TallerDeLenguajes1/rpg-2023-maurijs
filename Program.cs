@@ -56,7 +56,7 @@ public class Program
         if (int.TryParse(Console.ReadLine(), out opcion) && opcion>0 && opcion<11)
         {
             Console.WriteLine("\nJugador 1:");
-            Console.WriteLine("Nombre: " + ListaPersonajesRecup[opcion - 1].Nombre + " - Apodo: " + ListaPersonajesRecup[opcion - 1].Apodo + " - Raza: " + ListaPersonajesRecup[opcion - 1].Tipo);
+            Console.WriteLine("Nombre: " + ListaPersonajesRecup[opcion - 1].Nombre + " - Apodo: " + ListaPersonajesRecup[opcion - 1].Apodo + " - Familia: " + ListaPersonajesRecup[opcion - 1].Familia);
             
         } else
         {
@@ -67,15 +67,12 @@ public class Program
         if (int.TryParse(Console.ReadLine(), out opcion2) && opcion2>0 && opcion2<11 && opcion != opcion2)
         {
             Console.WriteLine("\nJugador 2:");
-            Console.WriteLine("Nombre: " + ListaPersonajesRecup[opcion2 - 1].Nombre + " Apodo: " + ListaPersonajesRecup[opcion2 - 1].Apodo + " - Raza: " + ListaPersonajesRecup[opcion2 - 1].Tipo);
+            Console.WriteLine("Nombre: " + ListaPersonajesRecup[opcion2 - 1].Nombre + " Apodo: " + ListaPersonajesRecup[opcion2 - 1].Apodo + " - Familia: " + ListaPersonajesRecup[opcion2 - 1].Familia);
             
         } else
         {
             Console.WriteLine("\nOpcion invalida");
         }
-        
-        
- 
         return;
     }
 

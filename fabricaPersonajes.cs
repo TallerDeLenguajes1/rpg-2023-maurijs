@@ -1,52 +1,62 @@
+using System.Net;
+using System.Text.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+
+
 namespace EspacioPersonajes
 {
-    public class FabricaPersonajes {
+    public class FabricaPersonajes
+    {
 
-        private Random random = new Random(); 
+        private Random random = new Random();
 
-        public personaje CrearPersonaje()
+        public personaje CrearPersonaje(string nombre, string apodo, string familia, List<string> quotes)
         {
 
-            personaje player = new personaje(); // este nuevo personaje retornara y actualizara al original
-            constantes constante = new constantes(); 
-            int opcion = numAleat(0, 2);
-        
-            switch (opcion)
+            personaje player = new personaje(); // este nuevo personaje retornara
+            player.Nombre = nombre;
+            player.Apodo = apodo;
+            player.Familia = familia;
+            player.Frases = new List<string>(quotes);
+            player.Edad = numAleat(20, 60);
+
+            switch (player.Familia)
             {
-                //Caracteristicas que dependen de la raza
-                case 0:
-                    player.Nombre = constante.nombreOrco[numAleat(0,14)];
-                    player.Apodo = constante.apodoOrco[numAleat(0, 14)];
-                    player.Tipo = TipoPersonaje.orco;
-                    player.Velocidad = numAleat(1, 5);
-                    player.Destreza = numAleat(3, 7);
+                case "House Targaryen of King's Landing":
+                    player.Velocidad = numAleat(2, 6);
+                    player.Destreza = numAleat(3,7 );
                     player.Fuerza = numAleat(6, 10);
-                    player.Edad = numAleat(30, 80);
-                    player.Defensa = numAleat(2, 6);
-                    break;
-                    
-                case 1:
-                    player.Nombre = constante.nombreElfo[numAleat(0,14)];
-                    player.Apodo = constante.apodoElfo[numAleat(0, 14)];
-                    player.Tipo = TipoPersonaje.elfo;
-                    player.Velocidad = numAleat(6, 10);
-                    player.Destreza = numAleat(1, 10);
-                    player.Fuerza = numAleat(1, 5);
-                    player.Edad = numAleat(200, 2000);
                     player.Defensa = numAleat(4, 8);
                     break;
-
-                case 2:
-                    player.Nombre = constante.nombreHumano[numAleat(0,14)];
-                    player.Apodo = constante.apodoHumano[numAleat(0, 14)];
-                    player.Tipo = TipoPersonaje.humano;
+                case "House Stark of Winterfell":
+                    player.Velocidad = numAleat(3, 7);
+                    player.Destreza = numAleat(6, 10);
+                    player.Fuerza = numAleat(4, 8);
+                    player.Defensa = numAleat(2, 6);
+                    break;
+                case "House Lannister of Casterly Rock":
                     player.Velocidad = numAleat(3, 7);
                     player.Destreza = numAleat(3, 7);
                     player.Fuerza = numAleat(3, 7);
-                    player.Edad = numAleat(20, 60);
+                    player.Defensa = numAleat(2, 6);
+                    break;
+                case "House Baratheon of Dragonstone":
+                    player.Velocidad = numAleat(3, 7);
+                    player.Destreza = numAleat(3, 7);
+                    player.Fuerza = numAleat(3, 7);
+                    player.Defensa = numAleat(2, 6);
+                    break;
+                // Para personajes de cualquier otra familia
+                default:
+                    player.Velocidad = numAleat(3, 7);
+                    player.Destreza = numAleat(3, 7);
+                    player.Fuerza = numAleat(3, 7);
+                    player.Defensa = numAleat(3, 7);
                     break;
             }
-            //Caracteristicas que no dependen de la raaza
+            //Caracteristicas que no dependen de la familia
             player.Armadura = numAleat(1, 10);
             player.Efectividad = numAleat(1, 100);
             player.Nivel = numAleat(1, 10);
@@ -68,19 +78,75 @@ namespace EspacioPersonajes
             return random.Next(min, max + 1);
         }
 
+
         public List<personaje> GenerarListaPersonajes(int cantidad)
         {
             FabricaPersonajes fabrica = new FabricaPersonajes();
             //personaje personaje;
             var ListaPersonajes = new List<personaje>();
-            for (int i = 0; i < cantidad; i++)
+            var ListaGOT =  GetPersonajesGOT();
+
+            if (ListaGOT == null)
             {
-                //personaje = fabrica.CrearPersonaje();
-                //ListaPersonajes.Add(personaje);
-                ListaPersonajes.Add(fabrica.CrearPersonaje());
+                // Si GetPersonajesGOT devuelve null, devolvemos una lista vacía para evitar problemas más adelante.
+                Console.WriteLine("Error al obtener la lista de personajes de la API.");
+                return ListaPersonajes;
             }
+            int indexFrase;
+            int indexRandom;
+            int cantPersonajes = ListaGOT.Count;
+            var IndexUsados = new List<int>();
+            personajeGOT personaje;
+        
+            while (IndexUsados.Count < cantidad)
+            {
+                indexRandom = numAleat(0,  cantPersonajes);
+            if (!IndexUsados.Contains(indexRandom))
+                IndexUsados.Add(indexRandom);
+
+            //Para que no se repitan los personajes
+            personaje = ListaGOT[indexRandom];
+            indexFrase = numAleat(0, personaje.quotes.Count);
+            ListaPersonajes.Add(fabrica.CrearPersonaje(personaje.name, personaje.slug, personaje.house.name, personaje.quotes));
+            IndexUsados.Add(indexRandom);
+            }
+            
             return ListaPersonajes;
         }
 
+        private static List<personajeGOT> GetPersonajesGOT()
+        {
+            var url = $"https://api.gameofthronesquotes.xyz/v1/characters/";
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            var ListCharacter = new List<personajeGOT>();
+            try
+            {
+                using (WebResponse response = request.GetResponse())
+                {
+                    using (Stream strReader = response.GetResponseStream())
+                    {
+                        if (strReader == null) return ListCharacter;
+                        using (StreamReader objReader = new StreamReader(strReader))
+                        {
+                            string responseBody = objReader.ReadToEnd();
+                            ListCharacter = JsonSerializer.Deserialize<List<personajeGOT>>(responseBody);
+                            foreach (var item in ListCharacter)
+                            {
+                                Console.WriteLine(item.name);
+                            }
+                            return ListCharacter;
+                        }
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                Console.WriteLine("Problemas de acceso a la API");
+                return ListCharacter;
+            }
+        }
     }
 }
