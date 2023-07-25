@@ -92,24 +92,35 @@ namespace EspacioPersonajes
                 Console.WriteLine("Error al obtener la lista de personajes de la API.");
                 return ListaPersonajes;
             }
-            int indexFrase;
             int indexRandom;
+            string familia;
             int cantPersonajes = ListaGOT.Count;
             var IndexUsados = new List<int>();
             personajeGOT personaje;
-            while (IndexUsados.Count < cantidad)
+            for (int i = 0; i < cantidad; i++)
             {
-                indexRandom = numAleat(0,  cantPersonajes);
-            if (!IndexUsados.Contains(indexRandom))
+                //Para que no se repitan los personajes
+                do
+                {
+                    indexRandom = numAleat(0,  cantPersonajes-1);
+                    
+                } while (IndexUsados.Contains(indexRandom));
+
+                personaje = ListaGOT[indexRandom];
                 IndexUsados.Add(indexRandom);
 
-            //Para que no se repitan los personajes
-            personaje = ListaGOT[indexRandom];
-            indexFrase = numAleat(0, personaje.quotes.Count);
-            ListaPersonajes.Add(fabrica.CrearPersonaje(personaje.name, personaje.slug, personaje.house.name, personaje.quotes));
-            IndexUsados.Add(indexRandom);
+                //Por si el personaje no pertenece a alguna de las casas conocidas
+                if (personaje.house == null)
+                {
+                     familia = "Desconocida";
+                } else
+                {
+                    familia = personaje.house.name;
+                }
+
+                ListaPersonajes.Add(fabrica.CrearPersonaje(personaje.name, personaje.slug, familia, personaje.quotes));
             }
-            
+
             return ListaPersonajes;
         }
 
