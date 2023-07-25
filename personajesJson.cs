@@ -5,23 +5,23 @@ namespace EspacioPersonajes
     public class PersonajesJson
     {
 
-        public List<personaje>  LeerPersonajes(string nombreArchivo)
+        public List<Personaje>  LeerPersonajes(string nombreArchivo)
         {
             
-            List<personaje> ListaPersonajes = new List<personaje>();
+            List<Personaje> ListaPersonajes = new List<Personaje>();
             using (var archivoOpen = new FileStream(nombreArchivo, FileMode.Open))
             {
                 using (var strReader = new StreamReader(archivoOpen))
                 {
                     string personajesJson = strReader.ReadToEnd();
-                    ListaPersonajes = JsonSerializer.Deserialize<List<personaje>>(personajesJson);
+                    ListaPersonajes = JsonSerializer.Deserialize<List<Personaje>>(personajesJson);
                     archivoOpen.Close();
                 }
             }
             return ListaPersonajes;
         }
 
-        public void GuardarPersonajes(string nombreArchivo, List<personaje> ListaPersonajes)
+        public void GuardarPersonajes(string nombreArchivo, List<Personaje> ListaPersonajes)
         {
             //Serializando
             string PersonajesJson = JsonSerializer.Serialize(ListaPersonajes);

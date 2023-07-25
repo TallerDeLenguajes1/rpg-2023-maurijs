@@ -12,7 +12,7 @@ namespace EspacioPersonajes
         public string name { get; set; }
     }
 
-    public class personajeGOT //Dao / DTO -> data transfer object 
+    public class PersonajeGOT //Dao / DTO -> data transfer object 
     {
         [JsonPropertyName("name")]
         public string name { get; set; }

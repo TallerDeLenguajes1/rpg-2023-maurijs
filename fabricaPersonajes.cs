@@ -12,10 +12,10 @@ namespace EspacioPersonajes
 
         private Random random = new Random();
 
-        public personaje CrearPersonaje(string nombre, string apodo, string familia, List<string> quotes)
+        public Personaje CrearPersonaje(string nombre, string apodo, string familia, List<string> quotes)
         {
 
-            personaje player = new personaje(); // este nuevo personaje retornara
+            Personaje player = new Personaje(); // este nuevo personaje retornara
             player.Nombre = nombre;
             player.Apodo = apodo;
             player.Familia = familia;
@@ -25,32 +25,32 @@ namespace EspacioPersonajes
             switch (player.Familia)
             {
                 case "House Targaryen of King's Landing":
-                    player.Velocidad = numAleat(2, 6);
+                    player.Inteligencia = numAleat(2, 6);
                     player.Destreza = numAleat(3,7 );
                     player.Fuerza = numAleat(6, 10);
                     player.Defensa = numAleat(4, 8);
                     break;
                 case "House Stark of Winterfell":
-                    player.Velocidad = numAleat(3, 7);
+                    player.Inteligencia = numAleat(3, 7);
                     player.Destreza = numAleat(6, 10);
                     player.Fuerza = numAleat(4, 8);
                     player.Defensa = numAleat(2, 6);
                     break;
                 case "House Lannister of Casterly Rock":
-                    player.Velocidad = numAleat(3, 7);
+                    player.Inteligencia = numAleat(3, 7);
                     player.Destreza = numAleat(3, 7);
                     player.Fuerza = numAleat(3, 7);
                     player.Defensa = numAleat(2, 6);
                     break;
                 case "House Baratheon of Dragonstone":
-                    player.Velocidad = numAleat(3, 7);
+                    player.Inteligencia = numAleat(3, 7);
                     player.Destreza = numAleat(3, 7);
                     player.Fuerza = numAleat(3, 7);
                     player.Defensa = numAleat(2, 6);
                     break;
                 // Para personajes de cualquier otra familia
                 default:
-                    player.Velocidad = numAleat(3, 7);
+                    player.Inteligencia = numAleat(3, 7);
                     player.Destreza = numAleat(3, 7);
                     player.Fuerza = numAleat(3, 7);
                     player.Defensa = numAleat(3, 7);
@@ -58,13 +58,13 @@ namespace EspacioPersonajes
             }
             //Caracteristicas que no dependen de la familia
             player.Armadura = numAleat(1, 10);
-            player.Efectividad = numAleat(1, 100);
-            player.Nivel = numAleat(1, 10);
+            player.Astucia = numAleat(1, 100);
+            player.Poder = numAleat(1, 10);
             player.FechaNac = new DateTime(DateTime.Now.Year - player.Edad, numAleat(1, 12), numAleat(1, 28));
             player.Salud = 100;
-            player.Defensa = player.Armadura * player.Velocidad;
-            player.Ataque = player.Destreza * player.Fuerza * player.Nivel;
-            player.DanioCausado = ((player.Ataque * player.Efectividad) - player.Defensa) / constantes.constanteAjuste;
+            player.Defensa = player.Armadura * player.Inteligencia;
+            player.Ataque = player.Destreza * player.Fuerza * player.Poder;
+            player.DanioCausado = ((player.Ataque * player.Astucia) - player.Defensa) / Constantes.constanteAjuste;
 
             return player;
         }
@@ -79,11 +79,11 @@ namespace EspacioPersonajes
         }
 
 
-        public List<personaje> GenerarListaPersonajes(int cantidad)
+        public List<Personaje> GenerarListaPersonajes(int cantidad)
         {
             FabricaPersonajes fabrica = new FabricaPersonajes();
             //personaje personaje;
-            var ListaPersonajes = new List<personaje>();
+            var ListaPersonajes = new List<Personaje>();
             var ListaGOT =  GetPersonajesGOT();
             if (ListaGOT == null)
             {
@@ -93,12 +93,11 @@ namespace EspacioPersonajes
             }
            
             var IndexUsados = new List<int>();
-            personajeGOT personaje;
             for (int i = 0; i < cantidad; i++)
             {
                 //Para que no se repitan los personajes
                 int indexRandom = GetRandomIndex(ListaGOT.Count, IndexUsados);
-                personaje = GetPersonajeByIndex(ListaGOT, indexRandom);
+                PersonajeGOT personaje = GetPersonajeByIndex(ListaGOT, indexRandom);
                 IndexUsados.Add(indexRandom);
                 var familia = GetHouse(personaje);
                 ListaPersonajes.Add(fabrica.CrearPersonaje(personaje.name, personaje.slug, familia, personaje.quotes));
@@ -107,7 +106,7 @@ namespace EspacioPersonajes
             return ListaPersonajes;
         }
 
-        private static personajeGOT GetPersonajeByIndex(List<personajeGOT> ListaGOT, int indexRandom)
+        private static PersonajeGOT GetPersonajeByIndex(List<PersonajeGOT> ListaGOT, int indexRandom)
         {
             return ListaGOT[indexRandom];
         }
@@ -123,20 +122,20 @@ namespace EspacioPersonajes
             return indexRandom;
         }
 
-        private static string GetHouse(personajeGOT personaje)
+        private static string GetHouse(PersonajeGOT personaje)
         {
             if (!personaje.hasHouse) return "Desconocida";           
             return personaje.GetHouse();
         }
 
-        private static List<personajeGOT> GetPersonajesGOT()
+        private static List<PersonajeGOT> GetPersonajesGOT()
         {
             var url = $"https://api.gameofthronesquotes.xyz/v1/characters/";
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
             request.ContentType = "application/json";
             request.Accept = "application/json";
-            var ListCharacter = new List<personajeGOT>();
+            var ListCharacter = new List<PersonajeGOT>();
             try
             {
                 using (WebResponse response = request.GetResponse())
@@ -147,11 +146,7 @@ namespace EspacioPersonajes
                         using (StreamReader objReader = new StreamReader(strReader))
                         {
                             string responseBody = objReader.ReadToEnd();
-                            ListCharacter = JsonSerializer.Deserialize<List<personajeGOT>>(responseBody);
-                            foreach (var item in ListCharacter)
-                            {
-                                Console.WriteLine(item.name);
-                            }
+                            ListCharacter = JsonSerializer.Deserialize<List<PersonajeGOT>>(responseBody);
                             return ListCharacter;
                         }
                     }
