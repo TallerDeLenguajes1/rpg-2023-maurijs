@@ -85,43 +85,48 @@ namespace EspacioPersonajes
             //personaje personaje;
             var ListaPersonajes = new List<personaje>();
             var ListaGOT =  GetPersonajesGOT();
-
             if (ListaGOT == null)
             {
                 // Si GetPersonajesGOT devuelve null, devolvemos una lista vacía para evitar problemas más adelante.
                 Console.WriteLine("Error al obtener la lista de personajes de la API.");
                 return ListaPersonajes;
             }
-            int indexRandom;
-            string familia;
-            int cantPersonajes = ListaGOT.Count;
+           
             var IndexUsados = new List<int>();
             personajeGOT personaje;
             for (int i = 0; i < cantidad; i++)
             {
                 //Para que no se repitan los personajes
-                do
-                {
-                    indexRandom = numAleat(0,  cantPersonajes-1);
-                    
-                } while (IndexUsados.Contains(indexRandom));
-
-                personaje = ListaGOT[indexRandom];
+                int indexRandom = GetRandomIndex(ListaGOT.Count, IndexUsados);
+                personaje = GetPersonajeByIndex(ListaGOT, indexRandom);
                 IndexUsados.Add(indexRandom);
-
-                //Por si el personaje no pertenece a alguna de las casas conocidas
-                if (personaje.house == null)
-                {
-                     familia = "Desconocida";
-                } else
-                {
-                    familia = personaje.house.name;
-                }
-
+                var familia = GetHouse(personaje);
                 ListaPersonajes.Add(fabrica.CrearPersonaje(personaje.name, personaje.slug, familia, personaje.quotes));
             }
 
             return ListaPersonajes;
+        }
+
+        private static personajeGOT GetPersonajeByIndex(List<personajeGOT> ListaGOT, int indexRandom)
+        {
+            return ListaGOT[indexRandom];
+        }
+
+        private int GetRandomIndex(int cantPersonajes, List<int> IndexUsados)
+        {
+            int indexRandom;
+            do
+            {
+                indexRandom = numAleat(0, cantPersonajes - 1);
+
+            } while (IndexUsados.Contains(indexRandom));
+            return indexRandom;
+        }
+
+        private static string GetHouse(personajeGOT personaje)
+        {
+            if (!personaje.hasHouse) return "Desconocida";           
+            return personaje.GetHouse();
         }
 
         private static List<personajeGOT> GetPersonajesGOT()
@@ -159,4 +164,6 @@ namespace EspacioPersonajes
             }
         }
     }
+
+    
 }

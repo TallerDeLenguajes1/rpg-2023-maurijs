@@ -12,9 +12,9 @@ namespace EspacioPersonajes
         public string name { get; set; }
     }
 
-    public class personajeGOT
+    public class personajeGOT //Dao / DTO -> data transfer object 
     {
-         [JsonPropertyName("name")]
+        [JsonPropertyName("name")]
         public string name { get; set; }
 
         [JsonPropertyName("slug")]
@@ -25,6 +25,10 @@ namespace EspacioPersonajes
 
         [JsonPropertyName("quotes")]
         public List<string> quotes { get; set; }
+        
+        public bool hasHouse => house != null;
+
+        public string GetHouse() => house.name;
         
     }    
 }

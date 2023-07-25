@@ -12,7 +12,7 @@ namespace EspacioPersonajes
     }
 
 
-    public class personaje
+    public class personaje //clases poco
     {
         //============== Datos =====================================//
         private string nombre;
