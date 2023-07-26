@@ -14,60 +14,59 @@ public class Program
         var ListaPersonajesRecup = new List<Personaje>();
         int cantidad;
         const string FileJsonPath = "personajes.json";
-        Console.WriteLine("Menu:\n 1-Nuevos personajes\n2-Personajes ya existentes");
 
-        int opcion;
-        if (int.TryParse(Console.ReadLine(), out opcion)) {
-            //Borramos el archivo json
-            if (opcion == 1) {
-                if (File.Exists(FileJsonPath)) {
+        if (TrabajandoJson.Existe(FileJsonPath)) {
+            Console.WriteLine("--Archivo personajes.json ya existente--\n");
+
+            Console.WriteLine("Menu:\n 1-Nuevos personajes\n 2-Personajes ya existentes");
+            
+            int opcion;
+            if (int.TryParse(Console.ReadLine(), out opcion) && (opcion == 1 || opcion == 2)) {
+                
+                //Borramos el archivo json
+                if (opcion == 1) {
                     try {
                         File.Delete(FileJsonPath);
                     }
                     catch (Exception e) {
                         Console.WriteLine("No se pudo borrar: {0}", e.Message);
                     }
-                }
-                else {
-                    Console.WriteLine("El archivo no existe");
-                }   
-            }
-        }
+                    //Creo los personajes aleatoriamente
+                    Console.WriteLine("-Ingrese la cantidad de personajes (2, 4 u 8):\n");
+                    if (int.TryParse(Console.ReadLine(), out cantidad) && cantidad % 2 == 0 && cantidad<10 && cantidad >0 && cantidad !=6)
+                    {
+                       //Guardamos los personajes en una lista y mostramos los elementos de la lista
+                        ListaPersonajes = fabrica.GenerarListaPersonajes(cantidad);     
+                        MostrarDatosPersonajes(ListaPersonajes);
 
-        //Si el archivo json no existe
-        if (!TrabajandoJson.Existe(FileJsonPath))
+                        //Creo el archivo personajes.json y guardo los datos de la lista en el
+                        TrabajandoJson.GuardarPersonajes(FileJsonPath, ListaPersonajes); 
+                    }
+                //Opcion 2
+                } else
+                {
+                 Console.WriteLine("--Cargando datos guardados--\n");
+                //Deserializando personajes.json y guardando en una lista
+                ListaPersonajes = TrabajandoJson.LeerPersonajes(FileJsonPath);
+                Console.WriteLine("--Mostrando listado de personajes recuperado--");
+                MostrarDatosPersonajes(ListaPersonajes);
+                }
+            }
+        // Si personajes.json no existe
+        } else
         {
-            Console.WriteLine("Archivo personajes.json no encontrado\n");
-            //Creo los 10 personajes
-            Console.WriteLine("--Creamos aleatoriamente los personajes--\n");
-            Console.WriteLine("--Ingrese la cantidad de personajes (2, 4, 8):--\n");
+            //Creo los personajes aleatoriamente
+            Console.WriteLine("-Ingrese la cantidad de personajes (2, 4 u 8):\n");
             if (int.TryParse(Console.ReadLine(), out cantidad) && cantidad % 2 == 0 && cantidad<10 && cantidad >0 && cantidad !=6)
             {
-                //cantidad de personajes
-                ListaPersonajes = fabrica.GenerarListaPersonajes(cantidad);  
-                
-                Console.WriteLine("\n--Guardamos los personajes en una lista--\n");
-                Console.WriteLine("\n--Mostramos los elementos de la lista--");
+                //Guardamos los personajes en una lista y mostramos los elementos de la lista
+                ListaPersonajes = fabrica.GenerarListaPersonajes(cantidad);     
                 MostrarDatosPersonajes(ListaPersonajes);
 
-                Console.WriteLine("\n--Creando archivo personajes.json--");
-
-                //Creo el archivo personajes.josn y guarda los datos de la lista en el
-                TrabajandoJson.GuardarPersonajes(FileJsonPath, ListaPersonajes);
-
-                Console.WriteLine("\n--Deserializando personajes.json y guardando en una lista--");
-                ListaPersonajesRecup = TrabajandoJson.LeerPersonajes(FileJsonPath); 
-
-                Console.WriteLine("--Mostrando listado de personajes recuperado--\n");
-                MostrarDatosPersonajes(ListaPersonajesRecup);
+                //Creo el archivo personajes.json y guardo los datos de la lista en el
+                TrabajandoJson.GuardarPersonajes(FileJsonPath, ListaPersonajes); 
             }
-
-        } else {
-            Console.WriteLine("--Archivo personajes.json ya existente--\n");
-
-            ListaPersonajes = TrabajandoJson.LeerPersonajes(FileJsonPath);
-            Console.WriteLine("--Mostrando listado de personajes recuperado--");
-            MostrarDatosPersonajes(ListaPersonajes);
+        // Batallas del juego
         }
         do
         {
@@ -88,14 +87,6 @@ public class Program
         return;
     }
 
-    public static void NombresPersonajes(List<Personaje> Lista)
-    {
-        foreach (var personaje in Lista)
-        {
-            Console.WriteLine("1- ");
-        }
-    }
-
     public static List<Personaje> Batallas(List<Personaje> Lista)
     {
 
@@ -107,24 +98,42 @@ public class Program
         switch (cantidad)
         {
             case 2:
-                Console.WriteLine(Lista[0].Nombre + " ⚔️  " + Lista[1].Nombre);
+                Console.WriteLine("\n=================== BATALLA FINAL  ===============================");
+                Console.WriteLine("\n"+Lista[0].Nombre + " ⚔️  " + Lista[1].Nombre+"\n");
                 Lista = UpdateAfterFight(Lista, 0, 1);
                 Ganador(Lista[0]);
                 break;
             case 4:
-                Console.WriteLine(Lista[2].Nombre +  " ⚔️  "+ Lista[3].Nombre);
+                Console.WriteLine("\n=================== TABLA DE COMBATES 📜 ===============================");
+                Console.WriteLine("\n"+Lista[2].Nombre +  " ⚔️  "+ Lista[3].Nombre);
+                Console.WriteLine("\n"+Lista[0].Nombre +  " ⚔️  "+ Lista[1].Nombre+"\n\n");
+
+
+                Console.WriteLine("\n=================== Primera Batalla ===============================");
+                Console.WriteLine("\n"+Lista[2].Nombre +  " ⚔️  "+ Lista[3].Nombre+"\n");
                 Lista = UpdateAfterFight(Lista, 2, 3);
-                Console.WriteLine(Lista[0].Nombre +  " ⚔️  "+ Lista[1].Nombre);
+                Console.WriteLine("\n=================== Segunda Batalla ===============================");
+                Console.WriteLine("\n"+Lista[0].Nombre +  " ⚔️  "+ Lista[1].Nombre+"\n");
                 Lista = UpdateAfterFight(Lista, 0, 1);
                 break;
             case 8:
-                Console.WriteLine(Lista[6].Nombre +  " ⚔️  "+ Lista[7].Nombre);
+                Console.WriteLine("\n=================== TABLA DE COMBATES 📜 ===============================");
+                Console.WriteLine("\n"+Lista[6].Nombre +  " ⚔️  "+ Lista[7].Nombre);
+                Console.WriteLine("\n"+Lista[4].Nombre +  " ⚔️  "+ Lista[5].Nombre);
+                Console.WriteLine("\n"+Lista[2].Nombre +  " ⚔️  "+ Lista[3].Nombre);
+                Console.WriteLine("\n"+Lista[0].Nombre +  " ⚔️  "+ Lista[1].Nombre+"\n");
+
+                Console.WriteLine("\n=================== Primera Batalla ===============================");
+                Console.WriteLine("\n"+Lista[6].Nombre +  " ⚔️  "+ Lista[7].Nombre+"\n");
                 Lista = UpdateAfterFight(Lista, 6, 7);
-                Console.WriteLine(Lista[4].Nombre +  " ⚔️  "+ Lista[5].Nombre);
+                Console.WriteLine("\n=================== Segunda Batalla ===============================");
+                Console.WriteLine("\n"+Lista[4].Nombre +  " ⚔️  "+ Lista[5].Nombre+"\n");
                 Lista = UpdateAfterFight(Lista, 4, 5);
-                Console.WriteLine(Lista[2].Nombre +  " ⚔️  "+ Lista[3].Nombre);
+                Console.WriteLine("\n=================== Tercera Batalla ===============================");
+                Console.WriteLine("\n"+Lista[2].Nombre +  " ⚔️  "+ Lista[3].Nombre+"\n");
                 Lista = UpdateAfterFight(Lista, 2, 3);
-                Console.WriteLine(Lista[0].Nombre +  " ⚔️  "+ Lista[1].Nombre);
+                Console.WriteLine("\n=================== Cuarta Batalla ===============================");
+                Console.WriteLine("\n"+Lista[0].Nombre +  " ⚔️  "+ Lista[1].Nombre+"\n");
                 Lista = UpdateAfterFight(Lista, 0, 1);
                 break;
         }
@@ -136,7 +145,7 @@ public class Program
         Random random = new Random();
         int indiceRandom = random.Next(0, player.Frases.Count);
         string FraseRandom = player.Frases[indiceRandom];
-        Console.WriteLine("============= GANADOR DEL TRONO ===============");
+        Console.WriteLine("\n============= 👑 GANADOR DEL TRONO 👑 ===============\n");
         Console.WriteLine(player.Nombre + " - Familia: " + player.Familia);
         Console.WriteLine("'" + FraseRandom + "'");
     }
@@ -146,11 +155,28 @@ public class Program
     {
         int i = 1;
         Random random = new Random();
+        Console.WriteLine(Lista[player1].Nombre + " - Salud:"+Lista[player1].Salud);
+        Console.WriteLine(Lista[player2].Nombre + " - Salud:"+Lista[player2].Salud);
         do
         {
-            Console.WriteLine("\nRonda "+i+"\n"+ Lista[player1].Nombre + " - Salud:"+Lista[player1].Salud+"\n"+Lista[player2].Nombre + " - Salud:"+Lista[player2].Salud);
-            Lista[player1].Salud = Lista[player1].Salud - Lista[player2].DanioCausado;
-            Lista[player2].Salud = Lista[player2].Salud - Lista[player1].DanioCausado;
+            Console.WriteLine("\nRonda " + i);
+            //Ataca el jugador 1
+            Lista[player2].Salud -= Lista[player1].DanioCausado;
+            //Si el jugador 2 se queda sin vida sale para evitar conflictos si mueren ambos
+            if (!Lista[player2].IsAlive){
+                //Para que no tenga un valor negativo
+                Console.WriteLine(Lista[player2].Nombre + " - Salud:0");
+                Console.WriteLine(Lista[player1].Nombre + " - Salud:"+Lista[player1].Salud);
+                break;
+            }
+
+            //Ataca el jugador 2
+            Lista[player1].Salud -= Lista[player2].DanioCausado;
+            //Para que no tenga un valor negativo
+            if (!Lista[player1].IsAlive) Lista[player1].Salud = 0;
+
+            Console.WriteLine(Lista[player2].Nombre + " - Salud:"+Lista[player2].Salud);
+            Console.WriteLine(Lista[player1].Nombre + " - Salud:"+Lista[player1].Salud);
             i++;
         // Mientras ambos jugadores tengan vida
         } while (Lista[player1].IsAlive && Lista[player2].IsAlive);
@@ -161,24 +187,38 @@ public class Program
         // Gana el primer jugador
         if (Lista[player1].IsAlive)
         {
-            Console.WriteLine("\nRonda "+i+"\n"+ Lista[player1].Nombre + " - Salud:"+Lista[player1].Salud+"\n"+Lista[player2].Nombre + " - Salud:0");
             indiceRandom = random.Next(Lista[player1].Frases.Count);
             FraseRandom = Lista[player1].Frases[indiceRandom];
 
-            Console.WriteLine("Ganador del Combate: " + Lista[player1].Nombre);
-            Console.WriteLine(Lista[player1].Nombre +": '" + FraseRandom + "'");
+            Console.WriteLine("\n"+Lista[player1].Nombre + " ha derrotado a " + Lista[player2].Nombre + "!!☠️  Mejoraran sus habilidades!\n");
+            Console.WriteLine(Lista[player1].Nombre + ": '" + FraseRandom + "'");
+            MejoraHabilidades(Lista, player1);
             Lista.RemoveAt(player2);
+            //Mejora las habilidades del ganador
+        }
         // Gana el segundo jugador
-        } else
+        else
         {
-            Console.WriteLine("\nRonda "+i+"\n"+ Lista[player1].Nombre + " - Salud:0"+"\n"+Lista[player2].Nombre + " - Salud:"+Lista[player2].Salud);
             indiceRandom = random.Next(Lista[player2].Frases.Count);
             FraseRandom = Lista[player2].Frases[indiceRandom];
-            Console.WriteLine("Ganador del Combate: " + Lista[player2].Nombre);
-            Console.WriteLine(Lista[player2].Nombre +": '" + FraseRandom + "'");
+
+            Console.WriteLine("\n"+Lista[player2].Nombre + " ha derrotado a " + Lista[player1].Nombre + "!!☠️  Mejoraran sus habilidades!\n");
+            Console.WriteLine("- "+FraseRandom+" -");
+            MejoraHabilidades(Lista, player2);
             Lista.RemoveAt(player1);    
+        //Mejora las habilidades del ganador
         }
         return Lista;
+    }
+
+    private static void MejoraHabilidades(List<Personaje> Lista, int player)
+    {
+        Lista[player].Salud = 100;
+        Lista[player].Fuerza += 2;
+        Lista[player].Poder += 2;
+        Lista[player].Inteligencia += 2;
+        Lista[player].Destreza += 2;
+        Lista[player].Armadura += 2;
     }
 }
 
