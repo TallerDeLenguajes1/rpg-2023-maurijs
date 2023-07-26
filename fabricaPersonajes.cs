@@ -37,29 +37,29 @@ namespace EspacioPersonajes
                     player.Defensa = numAleat(2, 6);
                     break;
                 case "House Lannister of Casterly Rock":
-                    player.Inteligencia = numAleat(3, 7);
-                    player.Destreza = numAleat(3, 7);
+                    player.Inteligencia = numAleat(2, 6);
+                    player.Destreza = numAleat(4, 8);
                     player.Fuerza = numAleat(3, 7);
-                    player.Defensa = numAleat(2, 6);
+                    player.Defensa = numAleat(6, 10);
                     break;
                 case "House Baratheon of Dragonstone":
-                    player.Inteligencia = numAleat(3, 7);
-                    player.Destreza = numAleat(3, 7);
-                    player.Fuerza = numAleat(3, 7);
-                    player.Defensa = numAleat(2, 6);
+                    player.Inteligencia = numAleat(4, 8);
+                    player.Destreza = numAleat(2, 6);
+                    player.Fuerza = numAleat(6, 10);
+                    player.Defensa = numAleat(3, 7);
                     break;
                 // Para personajes de cualquier otra familia
                 default:
-                    player.Inteligencia = numAleat(3, 7);
-                    player.Destreza = numAleat(3, 7);
-                    player.Fuerza = numAleat(3, 7);
-                    player.Defensa = numAleat(3, 7);
+                    player.Inteligencia = numAleat(2, 6);
+                    player.Destreza = numAleat(2, 6);
+                    player.Fuerza = numAleat(2, 6);
+                    player.Defensa = numAleat(2, 6);
                     break;
             }
             //Caracteristicas que no dependen de la familia
-            player.Armadura = numAleat(1, 10);
-            player.Astucia = numAleat(1, 100);
-            player.Poder = numAleat(1, 10);
+            player.Armadura = numAleat(2, 8);
+            player.Astucia = numAleat(2, 8);
+            player.Poder = numAleat(2, 8);
             player.FechaNac = new DateTime(DateTime.Now.Year - player.Edad, numAleat(1, 12), numAleat(1, 28));
             player.Salud = 100;
             player.Defensa = player.Armadura * player.Inteligencia;

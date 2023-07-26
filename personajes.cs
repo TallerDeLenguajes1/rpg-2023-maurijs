@@ -3,7 +3,7 @@ namespace EspacioPersonajes
     
     public class Constantes
     {
-        public const int constanteAjuste = 500;
+        public const int constanteAjuste = 100;
         //constructor 
         public Constantes()
         {
@@ -64,7 +64,7 @@ namespace EspacioPersonajes
         public string mostrarDatos()
         {
             string fecha = fechaNac.ToString("dd/MM/yyyy"); // Ejemplo de formato: "dd/MM/yyyy"
-            return "---------------Datos-------------\nNombre: " + Nombre + " - Apodo: " + Apodo +" - Edad: "+ Edad + " - Familia: " + familia + " - Fecha de Nacimiento: " + fecha + "\n------------Caracteristicas----------\nVelocidad: " + Inteligencia +" - Destreza: " + Destreza + " - Fuerza: " + Fuerza + " - Nivel: " + Poder + " - Armadura: " + Armadura + " - Salud: " + Salud + " - Ataque: " + Ataque + " - Defensa: " + Defensa + " - Efectividad: " + Astucia;
+            return "\n---------------Datos-------------\nNombre: " + Nombre + " - Apodo: " + Apodo +" - Edad: "+ Edad + " - Familia: " + familia + " - Fecha de Nacimiento: " + fecha + "\n------------Caracteristicas----------\nInteligencia: " + Inteligencia +" - Destreza: " + Destreza + " - Fuerza: " + Fuerza + " - Poder: " + Poder + " - Armadura: " + Armadura + " - Salud: " + Salud + " - Ataque: " + Ataque + " - Defensa: " + Defensa + " - Astucia: " + Astucia;
         }
     }
 }
