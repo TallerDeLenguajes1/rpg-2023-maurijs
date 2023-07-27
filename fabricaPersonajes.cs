@@ -25,28 +25,28 @@ namespace EspacioPersonajes
             switch (player.Familia)
             {
                 case "House Targaryen of King's Landing":
-                    player.Inteligencia = numAleat(2, 6);
+                    player.Inteligencia = numAleat(3, 7);
                     player.Destreza = numAleat(3,7 );
                     player.Fuerza = numAleat(6, 10);
-                    player.Defensa = numAleat(4, 8);
+                    player.Defensa = numAleat(2, 6);
                     break;
                 case "House Stark of Winterfell":
                     player.Inteligencia = numAleat(3, 7);
                     player.Destreza = numAleat(6, 10);
                     player.Fuerza = numAleat(4, 8);
-                    player.Defensa = numAleat(2, 6);
+                    player.Defensa = numAleat(2, 5);
                     break;
                 case "House Lannister of Casterly Rock":
-                    player.Inteligencia = numAleat(2, 6);
+                    player.Inteligencia = numAleat(3, 6);
                     player.Destreza = numAleat(4, 8);
                     player.Fuerza = numAleat(3, 7);
-                    player.Defensa = numAleat(6, 10);
+                    player.Defensa = numAleat(2, 8);
                     break;
                 case "House Baratheon of Dragonstone":
                     player.Inteligencia = numAleat(4, 8);
                     player.Destreza = numAleat(2, 6);
                     player.Fuerza = numAleat(6, 10);
-                    player.Defensa = numAleat(3, 7);
+                    player.Defensa = numAleat(2, 6);
                     break;
                 // Para personajes de cualquier otra familia
                 default:
