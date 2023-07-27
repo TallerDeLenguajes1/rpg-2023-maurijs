@@ -288,29 +288,29 @@ public class Program
        
         int indiceRandom;
         string FraseRandom;
-        // Gana el primer jugador
         if (Lista[player1].IsAlive)
         {
             indiceRandom = random.Next(Lista[player1].Frases.Count);
             FraseRandom = Lista[player1].Frases[indiceRandom];
 
-            Console.WriteLine("\n"+Lista[player1].Nombre + " ha derrotado a " + Lista[player2].Nombre + "!!☠️  Mejoraran sus habilidades!\n");
+            Console.WriteLine("\n"+Lista[player1].Nombre + " ha derrotado a " + Lista[player2].Nombre + "!!☠️ ");
             Console.WriteLine(Lista[player1].Nombre + ": '" + FraseRandom + "'");
             MejoraHabilidades(Lista, player1);
             Lista.RemoveAt(player2);
-            //Mejora las habilidades del ganador
         }
-        // Gana el segundo jugador
         else
         {
             indiceRandom = random.Next(Lista[player2].Frases.Count);
             FraseRandom = Lista[player2].Frases[indiceRandom];
 
-            Console.WriteLine("\n"+Lista[player2].Nombre + " ha derrotado a " + Lista[player1].Nombre + "!!☠️  Mejoraran sus habilidades!\n");
+            Console.WriteLine("\n"+Lista[player2].Nombre + " ha derrotado a " + Lista[player1].Nombre + "!!☠️ ");
             Console.WriteLine("- "+FraseRandom+" -");
             MejoraHabilidades(Lista, player2);
             Lista.RemoveAt(player1);    
-        //Mejora las habilidades del ganador
+        }
+        //Si no es la final
+        if (Lista.Count >= 2) {
+            Console.WriteLine("Salud recuperada!🚑❤️\nFuerza⬆️ ⬆️  - Poder⬆️ ⬆️  - Inteligencia⬆️ ⬆️  - Destreza⬆️ ⬆️  - Armadura⬆️ ⬆️");
         }
         return Lista;
     }
