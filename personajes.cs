@@ -20,9 +20,7 @@ namespace EspacioPersonajes
         private string familia;
         public List<string> Frases { get; set; } = new List<string>();
         private DateTime fechaNac;
-
         private int edad;
-
         //============== Datos =====================================//
 
         //============= Caracteristicas =============================//
@@ -57,10 +55,7 @@ namespace EspacioPersonajes
         public bool IsAlive => Salud > 0;
 
         //==============================================================//
-        public Personaje() // esta funcion la uso en el metodo de la fabrica
-        {
-        
-        }
+        public Personaje(){ }
         public string mostrarDatos()
         {
             string fecha = fechaNac.ToString("dd/MM/yyyy"); // Ejemplo de formato: "dd/MM/yyyy"

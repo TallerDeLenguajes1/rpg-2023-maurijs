@@ -7,8 +7,7 @@ public class Program
 {
     public static void Main()
     {
-        FabricaPersonajes fabrica = new FabricaPersonajes();
-        //Si no existe el constructor en el codigo de HelperDeJson, se considera un constructor sin argumentos
+        var fabrica = new FabricaPersonajes();
         var TrabajandoJson = new PersonajesJson();
         var ListaPersonajes = new List<Personaje>();
         var ListaPersonajesRecup = new List<Personaje>();
@@ -31,7 +30,7 @@ public class Program
                     catch (Exception e) {
                         Console.WriteLine("No se pudo borrar: {0}", e.Message);
                     }
-                    //Creo los personajes aleatoriamente
+                    
                     Console.WriteLine("-Ingrese la cantidad de personajes (2, 4 u 8):\n");
                     if (int.TryParse(Console.ReadLine(), out cantidad) && cantidad % 2 == 0 && cantidad<10 && cantidad >0 && cantidad !=6)
                     {
@@ -254,7 +253,6 @@ public class Program
         }
     }
 
-    // Realiza la pelea entre dos oponentes y me devuelve la lista actualizada al eliminar al perdedor
     public static List<Personaje> UpdateAfterFight(List<Personaje> Lista, int player1, int player2)
     {
         int i = 1;

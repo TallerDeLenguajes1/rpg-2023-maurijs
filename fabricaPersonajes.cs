@@ -1,16 +1,15 @@
 using System.Net;
 using System.Text.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-
 
 namespace EspacioPersonajes
 {
     public class FabricaPersonajes
     {
-
         private Random random = new Random();
+        private int numAleat(int min, int max)
+        {
+            return random.Next(min, max + 1);
+        }
 
         public Personaje CrearPersonaje(string nombre, string apodo, string familia, List<string> quotes)
         {
@@ -69,20 +68,9 @@ namespace EspacioPersonajes
             return player;
         }
 
-        public FabricaPersonajes()
-        {
-        }
-
-        private int numAleat(int min, int max)
-        {
-            return random.Next(min, max + 1);
-        }
-
-
         public List<Personaje> GenerarListaPersonajes(int cantidad)
         {
             FabricaPersonajes fabrica = new FabricaPersonajes();
-            //personaje personaje;
             var ListaPersonajes = new List<Personaje>();
             var ListaGOT =  GetPersonajesGOT();
             if (ListaGOT == null)
@@ -154,7 +142,7 @@ namespace EspacioPersonajes
             }
             catch (WebException ex)
             {
-                Console.WriteLine("Problemas de acceso a la API");
+                Console.WriteLine("Problemas de acceso a la API: {0}", ex.Message);
                 return ListCharacter;
             }
         }

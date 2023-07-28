@@ -23,7 +23,6 @@ namespace EspacioPersonajes
 
         public void GuardarPersonajes(string nombreArchivo, List<Personaje> ListaPersonajes)
         {
-            //Serializando
             string PersonajesJson = JsonSerializer.Serialize(ListaPersonajes);
 
             using(var archivo = new FileStream(nombreArchivo, FileMode.Create))
