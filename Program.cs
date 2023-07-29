@@ -300,24 +300,24 @@ public class Program
         {
             Console.WriteLine("\nRonda " + i);
             //Ataca el jugador 1
-            Lista[player2].Salud -= Lista[player1].DanioCausado;
+            Ataque(Lista, player1, player2);
             //Si el jugador 2 se queda sin vida sale para evitar conflictos si mueren ambos
-            if (!Lista[player2].IsAlive){
+            if (!Lista[player2].IsAlive)
+            {
                 //Para que no tenga un valor negativo
                 Console.WriteLine(Lista[player2].Nombre + " - Salud:0");
-                Console.WriteLine(Lista[player1].Nombre + " - Salud:"+Lista[player1].Salud);
+                Console.WriteLine(Lista[player1].Nombre + " - Salud:" + Lista[player1].Salud);
                 break;
             }
-
             //Ataca el jugador 2
-            Lista[player1].Salud -= Lista[player2].DanioCausado;
+            Ataque(Lista, player2, player1);
             //Para que no tenga un valor negativo
             if (!Lista[player1].IsAlive) Lista[player1].Salud = 0;
 
-            Console.WriteLine(Lista[player2].Nombre + " - Salud:"+Lista[player2].Salud);
-            Console.WriteLine(Lista[player1].Nombre + " - Salud:"+Lista[player1].Salud);
+            Console.WriteLine(Lista[player2].Nombre + " - Salud:" + Lista[player2].Salud);
+            Console.WriteLine(Lista[player1].Nombre + " - Salud:" + Lista[player1].Salud);
             i++;
-        // Mientras ambos jugadores tengan vida
+            // Mientras ambos jugadores tengan vida
         } while (Lista[player1].IsAlive && Lista[player2].IsAlive);
         
        
@@ -348,6 +348,11 @@ public class Program
             Console.WriteLine("\nSalud recuperada!🚑❤️  - Fuerza⬆️ ⬆️  - Poder⬆️ ⬆️  - Inteligencia⬆️ ⬆️  - Destreza⬆️ ⬆️  - Armadura⬆️ ⬆️");
         }
         return Lista;
+    }
+
+    private static void Ataque(List<Personaje> Lista, int player1, int player2)
+    {
+        Lista[player2].Salud -= ((Lista[player1].Ataque * Lista[player1].Astucia) - Lista[player2].Defensa) / Constantes.constanteAjuste;
     }
 
     private static void MejoraHabilidades(List<Personaje> Lista, int player)

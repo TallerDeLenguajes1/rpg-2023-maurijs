@@ -63,7 +63,7 @@ namespace EspacioPersonajes
             player.Salud = 100;
             player.Defensa = player.Armadura * player.Inteligencia;
             player.Ataque = player.Destreza * player.Fuerza * player.Poder;
-            player.DanioCausado = ((player.Ataque * player.Astucia) - player.Defensa) / Constantes.constanteAjuste;
+            
 
             return player;
         }

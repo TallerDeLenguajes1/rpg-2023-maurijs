@@ -1,6 +1,6 @@
-TP7 Suarez, Mauricio Josue
+**Proyecto de Taller de lenguajes 1 - Fecha de presentacion: 28/07/2023**
 
-En el comando "dotnet new console –output [ubicacion]", output nos indica la ubicación en la que se colocará el resultado generado.
+Mi proyecto consiste en un juego donde se realiza un torneo con los personajes de Juego de Tronos, los cuales son consumidos desde una API (https://api.gameofthronesquotes.xyz/v1/characters/) que me da el nombre completo, el slug, la casa a la que pertenece y frases reconocidas de cada personaje.
 
-"dotnet new console –output prueba" crea el proyecto en la carpeta "prueba"
-"dotnet new console –output ." crea el proyecto en la misma carpeta donde me encuentro.
+**Mecanica del juego**
+En el juego se puede elegir si el torneo sera de 2, 4 u 8 participantes, los cuales son elegidos aleatoriamente y guardados en un archivo json. A cada personaje se le cargan atributos tales como fuerza, destreza, inteligencia, etc. dentro de un determinado rango, este rango varia dependiendo la casa a la que pertenece el personaje. Despues de creados los personajes se muestra una tabla de emparejamientos, donde se muestra quien lucha con quien. La batalla se hace de forma automatica, el daño que inflige cada personaje en cada turno depende de un calculo que se realiza con los atributos de los personajes. Concluida la batalla, el ganador mejora alguna de sus habilidades y recupera su salud, y ademas se muestra por pantalla una frase reconocida del mismo. Luego el ganador de cada batalla se enfrenta con otro ganador, asi hasta llegar a la final, donde el ganador del torneo muestra nuevamente alguna de sus frases a su vez que se muestra la insignia de la casa a la cual pertenece.
