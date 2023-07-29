@@ -1,6 +1,3 @@
-TP7 Suarez, Mauricio Josue
+**Proyecto de Taller de lenguajes 1 - Fecha de presentacion: 28/07/2023**
+El proyecto presentado se encuentra en la rama GOT, este era una version alternativa(no terminada) en la cual el juego consistia en una lucha de orcos, elfos y humanos.
 
-En el comando "dotnet new console –output [ubicacion]", output nos indica la ubicación en la que se colocará el resultado generado.
-
-"dotnet new console –output prueba" crea el proyecto en la carpeta "prueba"
-"dotnet new console –output ." crea el proyecto en la misma carpeta donde me encuentro.
