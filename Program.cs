@@ -14,6 +14,7 @@ public class Program
         int cantidad;
         const string FileJsonPath = "personajes.json";
         LogoInicial();
+        Console.WriteLine("Enter para continuar...");
         Console.ReadLine();
         if (TrabajandoJson.Existe(FileJsonPath))
         {
@@ -43,6 +44,7 @@ public class Program
                         //Guardamos los personajes en una lista y mostramos los elementos de la lista
                         ListaPersonajes = fabrica.GenerarListaPersonajes(cantidad);
                         MostrarDatosPersonajes(ListaPersonajes);
+                        Console.WriteLine("Enter para continuar...");
                         Console.ReadLine();
                         //Creo el archivo personajes.json y guardo los datos de la lista en el
                         TrabajandoJson.GuardarPersonajes(FileJsonPath, ListaPersonajes);
@@ -56,6 +58,7 @@ public class Program
                     ListaPersonajes = TrabajandoJson.LeerPersonajes(FileJsonPath);
                     Console.WriteLine("--Mostrando listado de personajes recuperado--");
                     MostrarDatosPersonajes(ListaPersonajes);
+                    Console.WriteLine("Enter para continuar...");
                     Console.ReadLine();
                 }
             }
@@ -70,6 +73,7 @@ public class Program
                 //Guardamos los personajes en una lista y mostramos los elementos de la lista
                 ListaPersonajes = fabrica.GenerarListaPersonajes(cantidad);
                 MostrarDatosPersonajes(ListaPersonajes);
+                Console.WriteLine("Enter para continuar...");
                 Console.ReadLine();
                 //Creo el archivo personajes.json y guardo los datos de la lista en el
                 TrabajandoJson.GuardarPersonajes(FileJsonPath, ListaPersonajes);
@@ -79,6 +83,7 @@ public class Program
         do
         {
             ListaPersonajes = Batallas(ListaPersonajes);
+            Console.WriteLine("Enter para continuar...");
             Console.ReadLine();
         } while (ListaPersonajes.Count > 1);
         return;
@@ -127,6 +132,7 @@ public class Program
             case 2:
                 Console.WriteLine("\n=================== BATALLA FINAL  ===============================");
                 Console.WriteLine("\n"+Lista[0].Nombre + " ⚔️  " + Lista[1].Nombre+"\n");
+                Console.WriteLine("Enter para continuar...");
                 Console.ReadLine();
                 Lista = UpdateAfterFight(Lista, 0, 1);
                 Ganador(Lista[0]);
@@ -135,14 +141,17 @@ public class Program
                 Console.WriteLine("\n=================== TABLA DE COMBATES 📜 ===============================");
                 Console.WriteLine("\n"+Lista[2].Nombre +  " ⚔️  "+ Lista[3].Nombre);
                 Console.WriteLine("\n"+Lista[0].Nombre +  " ⚔️  "+ Lista[1].Nombre+"\n\n");
+                Console.WriteLine("Enter para continuar...");
                 Console.ReadLine();
 
                 Console.WriteLine("\n=================== Primera Batalla ===============================");
                 Console.WriteLine("\n"+Lista[2].Nombre +  " ⚔️  "+ Lista[3].Nombre+"\n");
+                Console.WriteLine("Enter para continuar...");
                 Console.ReadLine();
                 Lista = UpdateAfterFight(Lista, 2, 3);
                 Console.WriteLine("\n=================== Segunda Batalla ===============================");
                 Console.WriteLine("\n"+Lista[0].Nombre +  " ⚔️  "+ Lista[1].Nombre+"\n");
+                Console.WriteLine("Enter para continuar...");
                 Console.ReadLine();
                 Lista = UpdateAfterFight(Lista, 0, 1);
                 break;
